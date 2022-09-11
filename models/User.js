@@ -5,7 +5,19 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 // TODO: Need to figure out a way to check passwords
-class User extends Model {};
+
+// Reference: https://www.npmjs.com/package/bcrypt
+/*
+compareSync(data, encrypted)
+data - [REQUIRED] - data to compare.
+encrypted - [REQUIRED] - data to be compared to.
+*/
+
+class User extends Model {
+    checkUserPassword(loginPassword) {
+        return bcrypt.compareSync(loginPassword, this.password);
+    };
+};
 
 User.init({
     id: {
