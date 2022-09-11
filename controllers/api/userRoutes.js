@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 // const path = require('path');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 const bcrypt = require('bcrypt');
 
 // We bring in the user model since this is what we will be interacting with. 
@@ -112,7 +112,7 @@ router.post('/login', async (req, res) => {
 
 // The logout route, will identify an existing sign in session and destroy the sign
 // in session, this effectively logs out the user.
-router.post('/logout', async (req, res) => {
+router.post('/logout', withAuth, async (req, res) => {
     try {
         if(req.session.logged_in) {
             req.session.destroy(() => {
