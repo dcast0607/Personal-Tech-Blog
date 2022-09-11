@@ -54,6 +54,9 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
+
+},
+{
     hooks: {
         beforeCreate: async (newUser) => {
             newUser.password = await bcrypt.hash(newUser.password, 10);
