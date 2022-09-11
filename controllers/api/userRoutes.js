@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const withAuth = require('../../utils/auth');
+const bcrypt = require('bcrypt');
 
 const { User } = require('../../models');
 
@@ -17,12 +19,33 @@ router.use((req, res, next) => {
     next();
   });
 
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const userData = await User.findOne(req.params.id);
-//         res.status(200).json(userData);
-//     }
-//     catch (err) {
-//         res.status(400).json(err);
-//     }
-// });
+
+router.post('/', async (req, res) => {
+    try {
+
+    }
+    catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+router.post('/login', async (req, res) => {
+    try {
+
+    }
+    catch (err) {
+        res.status(400).json(err);
+    };
+});
+
+router.post('/logout', async (req, res) => {
+    try {
+        
+    } 
+    catch (err) {
+        res.status(404).json(err);
+    };
+});
+
+
+module.exports = router;

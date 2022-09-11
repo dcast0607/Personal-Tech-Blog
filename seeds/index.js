@@ -5,14 +5,12 @@ const seedPost = require('./postSeeds');
 const sequelize = require('../config/connection');
 
 const seedAll = async () => {
-    await sequelize.sync({ force: true });
-    console.log('\n----- DATABASE SYNCED -----\n');
+    await sequelize.sync({ force: true })
+    
+    const userData = await seedUser();
+    const postData = await seedPost();
 
-    await seedUser();
-    console.log('\n----- USER SEEDED -----\n');
-
-    await seedPost();
-    console.log('\n----- POST SEEDED -----\n');
+    console.log("Seeding database...........");
 
     process.exit(0);
 };

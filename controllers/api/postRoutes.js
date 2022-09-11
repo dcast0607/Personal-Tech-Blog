@@ -17,12 +17,14 @@ router.use((req, res, next) => {
     next();
   });
 
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const postData = await Post.findOne(req.params.id);
-//         res.status(200).json(postData);
-//     }
-//     catch (err) {
-//         res.status(400).json(err);
-//     }
-// });
+ router.get('/:id', async (req, res) => {
+     try {
+         const postData = await Post.findOne(req.params.id);
+         res.status(200).json(postData);
+     }
+     catch (err) {
+         res.status(400).json(err);
+     }
+});
+
+module.exports = router;
