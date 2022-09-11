@@ -5,6 +5,7 @@ const withAuth = require('../../utils/auth');
 const bcrypt = require('bcrypt');
 
 const { User } = require('../../models');
+const { equal } = require('assert');
 
 router.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -83,7 +84,13 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
     try {
-        
+        if(req.session.logged_in) {
+            req.session.destroy(() => {
+                res.status(201).json("User session has been terminated!").end();
+            });
+        } else {
+            res.status((400).json("No existing sign in session!").end());
+        }
     } 
     catch (err) {
         res.status(404).json(err);
