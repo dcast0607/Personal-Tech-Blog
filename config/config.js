@@ -1,15 +1,15 @@
 require('dotenv').config(); // this is important!
 module.exports = {
 "development": {
-    "username": process.env.DB_USER,
-    "password": process.env.DB_PASSWORD,
-    "database": process.env.DB_NAME,
+    "DB_NAME": "root",
+    "DB_PASSWORD": "rootroot",
+    "DB_NAME": "techBlogDB",
     "dialect": "mysql"
 },
 "test": {
-    "username": "root",
-    "password": "rootroot",
-    "database": "techBlogDB",
+    "DB_NAME": "root",
+    "DB_PASSWORD": "rootroot",
+    "DB_NAME": "techBlogDB",
     "dialect": "mysql"
 },
 "production": {
