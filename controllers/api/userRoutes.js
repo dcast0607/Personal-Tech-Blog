@@ -13,7 +13,7 @@ const { User } = require('../../models');
 // was to include this to clear up any CORS issues. This is why I have added that
 // here.
 router.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
       "Origin, X-Requested-With, Content-Type, Accept",
@@ -74,6 +74,7 @@ router.post('/', async (req, res) => {
 // session. If the password is not valid, we do not authenticate the user and we return
 // an error as part of our API response.
 router.post('/login', async (req, res) => {
+    console.log(req.body);
     try {
         console.log(req.body);
         const response = await User.findOne({

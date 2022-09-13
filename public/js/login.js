@@ -4,6 +4,11 @@ const loginFormHandler = async (e) => {
     const username = document.querySelector('#username').value.trim();
     const password = document.querySelector('#password').value.trim();
 
+    const data = {
+        username: username,
+        password: password
+    }
+
     console.log(username, password);
     console.log(JSON.stringify({username, password}));
 
@@ -11,8 +16,8 @@ const loginFormHandler = async (e) => {
         console.log("Sending API Request");
         const response = await fetch('api/users/login', {
             method: 'POST',
-            body: JSON.stringify({ username, password }),
-            header: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            header: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         })
 
         if (response.ok) {
