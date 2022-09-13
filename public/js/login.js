@@ -8,22 +8,20 @@ const loginFormHandler = async (e) => {
     console.log(JSON.stringify({username, password}));
 
     if (username && password) {
-        const userLogin = await fetch('api/users/login', {
+        console.log("Sending API Request");
+        const response = await fetch('api/users/login', {
             method: 'POST',
             body: JSON.stringify({ username, password }),
             header: { 'Content-Type': 'application/json' },
         })
-        .then((userLogin) => {
-            console.log(userLogin);
-            if (userLogin.ok) {
-                document.location.replace('/posts');
-            } else {
-                console.log("Something went wrong!");
-            }
-        })  
-        .catch((err) => {
-            console.log(err);
-        });
+
+        if (response.ok) {
+            document.location.replace('/posts');
+        } else {
+            alert("We are not able to log you in successfully. Please try again!")
+            console.log(response.message);
+        }
+
     } else {
         console.log("Please make sure that you enter both a username and password!");
         alert("Please make sure that you enter both a username and password!");
