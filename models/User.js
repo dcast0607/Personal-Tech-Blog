@@ -19,7 +19,8 @@ class User extends Model {
     };
 };
 
-User.init({
+User.init(
+{
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,

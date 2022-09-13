@@ -174,6 +174,7 @@ router.put('/:id', withAuth, async (req, res) => {
     };
 });
 
+
 router.delete('/:id', async (req, res) => {
     try {
       const removeData = await Post.destroy({

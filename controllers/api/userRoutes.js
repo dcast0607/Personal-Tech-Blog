@@ -76,37 +76,42 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         console.log(req.body);
-        const existingUser = await User.findOne({
+        const response = await User.findOne({
             where: {
                 username: req.body.username,
             }
         })
-        .then((existingUser) => {
-            //console.log(existingUser);
-            if (existingUser) {
-                const passwordValidator = existingUser.checkUserPassword(req.body.password);
+        .then((response) => {
+            console.log(response);
+            if (response) {
+                const passwordValidator = response.checkUserPassword(req.body.password);
                 if (passwordValidator) {
 
                     req.session.save(() => {
-                        req.session.user_id = existingUser.id;
+                        req.session.user_id = response.id;
                         req.session.logged_in = true;
                         res.status(200).json("User logged in successfully.");
+                        return;
                     });
 
                 } else {
                     res.status(400).json("Password does not match, please try again.");
+                    return;
                 }
 
             } else {
                 res.status(400).json("We could not find the user, please make sure that you are attempting to login as an existing user.");
+                return;
             }
         })
         .catch((err) => {
-            console.log(err);
+            res.status(400).json(err);
+            return;
         });
     }
     catch (err) {
         res.status(400).json(err);
+        return;
     };
 });
 
@@ -117,13 +122,16 @@ router.post('/logout', withAuth, async (req, res) => {
         if(req.session.logged_in) {
             req.session.destroy(() => {
                 res.status(201).json("User session has been terminated!").end();
+                return;
             });
         } else {
             res.status((400).json("No existing sign in session!").end());
+            return;
         };
     } 
     catch (err) {
         res.status(404).json(err);
+        return;
     };
 });
 
